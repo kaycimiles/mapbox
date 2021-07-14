@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title></title> 
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+
+    <style>
+	    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        }
+        
+        header {
+            position: fixed;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 50px;
+            background: #4A5658;
+            padding: 0%;
+            z-index: 2;
+        }
+
+
+        h1 {
+            font-size: 2em;
+            margin: .5%;
+            color: #DDD3C3;
+            font-family: Bahnschrift Condensed;
+
+        }
+        h5 {
+            left: 80;
+            margin: .5%;
+            color: #4A5658;
+            font-family: Bahnschrift Condensed;
+
+        }
+        a {
+            color: #BF7A68;
+        }
+        
+        #map-container {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 70%;
+            height: 100%;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+       #content-container {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 30%;
+            height: 100%;
+
+       }
+       
+       #content {   
+            width: auto%;
+            height: 100%;
+            margin-top: 30px;
+            overflow: hidden;
+            padding: 5%;
+        }
+
+       .mountains  {
+            font-family: Bahnschrift Condensed, sans-serif;
+            padding: 2%;
+            border: 1px #BF7A68;
+            height: 100%;
+            color: #4A5658;
+            font-size: .9em;
+            font-weight: bold;
+        
+           
+        }
+
+        button  {
+           position: absolute;
+           top: 8%;
+           right: 2%;
+           font-size: .8em;
+           font-weight: bold;
+           padding: 1%;
+           z-index: 10;
+           background: #BF7A68;
+           opacity: 0;
+           border-radius: 15%;
+           color: #DDD3C3;
+        }
+        img {
+          
+          padding-top: 2%;
+          width: 100%;
+
+
+        }
+
+        .marker {
+            background-image: url(img/icon.png);
+            background-size: cover;
+            width: 35px;
+            height: 35px;
+            border-radius: 35%;
+            cursor: pointer;
+           
+            
+        }
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: Bahnschrift Condensed, sans-serif;
+            font-weight: bold;
+            background-color: #BF7A68;
+            color: #DDD3C3;
+            font-size: 15px;
+        }
+
+        /*for css fades*/
+        .show {
+          transition: opacity 1000ms;
+          opacity: 1;
+        }
+        .hide {
+          opacity: 0;
+        }
+    </style>
+</head>
+<body>
+	<header><h1>Washington State Mountains and Their Tribal Names</h1> 
+        <h5>Website Created By: Kayci Miles, WSU 2021</h5>
+    </header>
+
+
+	<div id='map-container'>
+		<div id='map'></div>
+		<button>RESET MAP</button>
+	</div>
+	<div id='content-container'>
+		<div id='content'>
+            <div class="mountains" id="intro"><h2>Begin here</h2><p>Click on a mountain icon to reveal their tribal names. Viewers will embark the historical tribal stories for naming these mountains.  As a Cowlitz Tribal Member I am passionate about the history of Native Americans and restoring our mountain tribal names. Let the stories be told and remembered.</p>
+            <img src="img/onmountain.jpg">
+            <p>Image Source: www.nps.gov </p></div>
+
+			<div class="mountains" id="mountsainthelens"><h2>Mount Saint Helens</h2><p>Native American names for Mount St. Helens were "Loowit" or "Louwala-Clough", which meant "smoking mountain". A Gifford Pinchot National Forest "Mount St. Helens" Brochure (1980) tells the story of how Mount St. Helens came to be:
+            "... Northwest Indians told early explorers about the fiery Mount St. Helens. In fact, an Indian name for the mountain, Louwala-Clough, means "smoking mountain". According to one legend, the mountain was once a beautiful maiden, "Loowit". When two sons of the Great Spirit "Sahale" fell in love with her, she could not choose between them. The two braves, Wyeast and Klickitat fought over her, burying villages and forests in the process. Sahale was furious. He smote the three lovers and erected a mighty mountain peak where each fell. Because Loowit was beautiful, her mountain (Mount St. Helens) was a beautiful, symmetrical cone of dazzling white. Wyeast (Mount Hood) lifts his head in pride, but Klickitat (Mount Adams) wept to see the beautiful maiden wrapped in snow, so he bends his head as he gazes on St. Helens. ..."  </p>
+            <a href="https://volcanoes.usgs.gov/observatories/cvo/Historical/naming_mount_st_helens.shtml#:~:text=Native%20American%20names%20for%20Mount,which%20meant%20%22smoking%20mountain%22.">View Full Story Here</a>
+            <img src="img/helens.jpg">
+            <p> Image Credit: www.nature.com </p>
+            </div>
+            <div class="mountains" id="mountrainier"><h2>Mount Rainier</h2><p>The people of the Puyallup tribe have known the mountain as Tahoma or Tacoma since time immemorial. The word has multiple meanings, all with bioregional relevance. By definition, Tahoma can mean mother of waters or that frozen water both recognizing the glaciated peak as the significant source that it is. The word is also understood to mean large snowy mountain, a trait it certainly exemplifies. Another etymological explanation derives from definitions of the name’s component parts in the Lashootseed language; Ta (larger/taller) Koma-Kulshan (name for Mount Baker). Farther afield names such as Talol and Ti’Swaq are also applied to the mountain, reflecting the relativity with which native place names must be approached.</p>
+            <a href="https://cascadiabioregion.org/department-of-bioregion/native-palce-names-from-mt-rainier-to-tahoma">View Full Story Here</a>
+            <img src="img/rainier.png">
+            <p> Image Credit: www.tehaleh.com </p>
+            </div>
+            <div class="mountains" id="mountadams"><h2>Mount Adams</h2><p>Mount Adams (12,307 feet in altitude), the second highest peak in Washington, stands in the southwestern part of the state. The Klickitat and Yakama Indians called it Pahto. They claimed it as their mountain.
+
+            This legend was told by Chief Jobe Charley, with his granddaughter, Hattie Wesley, acting as interpreter. Now eighty-six years old, Jobe Charley heard the story when he was a little boy. When he got his first horse, he rode to Mount Adams and climbed it. Until he saw the eagles up there, he had not believed the story. Many eagles are hatched in the caves in the east side of Mount Adams.
+
+            Back when the mountains were people, Sun was a man. He had five mountains for his wives. One was Plash-Plash, where the Goat Rocks are now. Plash-Plash means “white spots.” Another was Wahkshum, west of Satus Pass. The others were Mount Adams, Mount Rainier, and Mount St. Helens. The Indians called all of them Pahto, which means “standing high.” </p>
+            <a href="https://www.gatheringthestories.org/2015/01/13/a-mount-adams-story/"> View Full Story Here</a>
+            <img src="img/adams.jpg">
+            <p> Image Credit: www.mountain-forcast.com</p>
+             </div>
+            <div class="mountains" id="mountbaker"><h2>Mount Baker</h2><p>In the northwestern Cascades stands Mount Baker, the "Bride of the Pacific," always white robed. In the Lummi Indian tongue the mountain is called Kulshan — once an active volcano, it is now accounted extinct. It is not now known how long the mountain has borne this name nor exactly why it was given but it is very certain that Kulshan has been Kulshan for many generations. One of the most intelligent of the Lummi Indians attributes the name to the fact that the mountain was once conical and that the peak itself was destroyed by volcanic eruptions and explosions. The summit is not now conical but a cup-like crater. The name Kulshan is applied to other things than the mountain — any object that is long, slim or tall becomes Kulshan when shot at, struck and affected at the end.
+            husband that she supplanted Duh-hwahk in the affections of Kulshan.</p>
+            <a href="http://www.stumpranchonline.com/skagitjournal/Washington/Whatcom/MtBaker/Baker5-IndianLegend.html">View Full Story Here</a>
+            <img src="img/baker.jpg">
+            <p> Image Credit: www.citynews1130.com </p>
+           
+             </div>
+         </div>
+    </div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibWlsZXNrYXljaSIsImEiOiJja205cDExY20weTBzMm9wOTcwanMwaTY1In0._SFJwpgrOUMIKhHmQMU8Sw';
+
+    let geojson = {
+    "type": "FeatureCollection",
+    "features": [{
+         "type": "Feature",
+         "geometry": {
+             "type": "Point",
+             "coordinates": [-121.760451, 46.852864]
+         },
+         "properties": {
+             "title": "Tahoma",
+             "description": "Mount Rainier",
+             "url": '#mountrainier'
+         }
+     },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-122.195465, 46.191667]
+        },
+         "properties": {
+             "title": "Loowit",
+             "description": "Mount Saint Helens",
+             "url": '#mountsainthelens'
+         }
+     },
+      {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-121.879903, 48.780300]
+        },
+         "properties": {
+             "title": "Kulshan",
+             "description": "Mount Baker",
+             "url": '#mountbaker'
+         }
+     },
+    
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-121.490834, 46.203050]
+     },
+         "properties": {
+             "title": "Pahto",
+             "description": "Mount Adams",
+             "url": '#mountadams'
+         }
+     }]
+};
+
+    let reset = document.querySelector('button');
+
+
+    let map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mileskayci/ckm9z7tq61dun17qmf6awjdkd', // style URL
+        center: [-122.904683, 47.038275], // starting position [lng, lat]
+        zoom: 6 // starting zoom
+    });
+
+    // add markers to map
+    geojson.features.forEach(function(marker) {
+
+        // create a HTML element for each feature
+        let el = document.createElement('div');
+        el.className = 'marker';
+        //el.style.backgroundImage = marker.properties.icon;
+
+
+        el.addEventListener('click', function() {
+            map.flyTo({
+                center: marker.geometry.coordinates, 
+                zoom: 10
+            });
+            window.location = marker.properties.url;
+            //$('.info-box').fadeOut();
+           //$(marker.properties.url).fadeIn(1000);
+            //document.querySelector(marker.properties.url).style.display = 'block'; 
+            //reset.style.display = 'block';
+            reset.classList.remove('hide');
+            reset.classList.add('show');
+        });
+
+        
+
+        // make a marker for each feature and add it to the map
+        new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .setPopup(new mapboxgl.Popup({offset: 25}) // add popups
+            .setHTML(`<h3>${marker.properties.title}</h3><p>${marker.properties.description}</p>`))
+            .addTo(map);
+
+
+    }); // end Marker settings
+
+
+    // disable map zoom when using scroll
+    map.scrollZoom.disable();
+
+    // click event for reset button
+   reset.addEventListener('click', function() {
+            map.flyTo({
+                center:[-122.904683, 47.038275], 
+                zoom: 6
+            });
+            //this.style.display = 'none';
+            reset.classList.remove('show');
+            reset.classList.add('hide');
+
+        });
+
+
+
+
+</script>
+
+</body>
+</html>
